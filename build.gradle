@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath group: "com.netflix.nebula", name: "nebula-project-plugin", version: "2.2.0"
+    }
+}
+
+apply plugin: "groovy"
+apply plugin: "java-gradle-plugin"
+apply plugin: "nebula-integtest"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile("com.netflix.nebula:nebula-test:2.2.0") {
+        exclude group: "org.codehaus.groovy", module: "groovy-all"
+    }
+    integTestCompile "com.moowork.gradle:gradle-grunt-plugin:0.9"
+    integTestCompile "com.moowork.gradle:gradle-gulp-plugin:0.9"
+}
+
+group "com.palantir"
