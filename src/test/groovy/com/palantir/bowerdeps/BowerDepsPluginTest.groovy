@@ -35,6 +35,8 @@ class BowerDepsPluginSpec extends Specification {
 
         then:
         artifacts.size() == size
+        // Items is either null (empty) or check that all items are contained in the artifacts array
+        // uses "inject" (the groovy version of reduce or foldl) to check contains and return a boolean
         items == null || items.inject(true) { acc, val -> artifacts.contains(val) && acc }
 
         where:
