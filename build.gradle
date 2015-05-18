@@ -36,6 +36,7 @@ apply plugin: 'nebula-integtest'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'distribution'
 
 repositories {
     maven {
@@ -63,6 +64,10 @@ ext {
     travisTag = System.env.'TRAVIS_TAG'
 }
 
+tasks.withType(Tar) {
+    compression Compression.GZIP
+}
+
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     classifier 'sources'
@@ -75,11 +80,31 @@ task ci {
     }
 }
 
+distTar.dependsOn 'publishMavenJavaPublicationToMavenRepository'
+distZip.dependsOn 'publishMavenJavaPublicationToMavenRepository'
+
+distributions {
+    main {
+        contents {
+            from ("${buildDir}/localpublish") {
+                include '**/*'
+                exclude '**/maven-metadata.xml*'
+            }
+        }
+    }
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
             artifact sourceJar
+        }
+    }
+
+    repositories {
+        maven {
+            url "$buildDir/localpublish/"
         }
     }
 }

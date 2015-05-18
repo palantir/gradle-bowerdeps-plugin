@@ -1,5 +1,14 @@
 language: java
 jdk:
-  - oraclejdk7
+- oraclejdk7
 script:
-  - ./gradlew ci --stacktrace
+- "./gradlew ci --stacktrace"
+deploy:
+  provider: releases
+  api_key:
+    secure: Yi8pR9xPhVYN/CwoZTmM+nWAyFuiV/WQg8Cu/a+l+LOKmLNm3f0j6ArPUHV6K6Kp3VPVI43Ffy8cgr7svf9PJvPP80iqic1Wxfmu/L9XZRAB9vSP5M8F2DyjyGr9J+dLLET7f9bhCG04ouETPDA16aU57C8t/jXnQJrkMIOQt7Q=
+  file: build/distributions/*
+  skip_cleanup: true
+  file_glob: true
+  on:
+    tags: true
