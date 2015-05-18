@@ -1,6 +1,7 @@
 # Gradle Plugin for Multi-Project Bower Dependency Ordering
 
 [![Build Status](https://travis-ci.org/palantir/gradle-bowerdeps-plugin.svg?branch=develop)](https://travis-ci.org/palantir/gradle-bowerdeps-plugin)
+[![Build Status](https://api.bintray.com/packages/palantir/releases/gradle-bowerdeps-plugin/images/download.svg)](https://bintray.com/palantir/releases/gradle-bowerdeps-plugin)
 
 This plugin is useful in multi-project gradle builds where `bower.json` is used to declare dependencies between projects. It sets the cross project dependencies so that projects build in the correct order.
 
@@ -19,10 +20,6 @@ This plugin is useful in multi-project gradle builds where `bower.json` is used 
 7. Adds the task dependencies of the "bower" configuration as dependencies of the default front end build task, e.g. `grunt default
 
 ## Installing the plugin ##
-
-Releases of this plugin are hosted at https://bintray.com/palantir/releases/gradle-bowerdeps-plugin.
-
-Setup the plugin like this:
 
 ```groovy
 buildscript {
