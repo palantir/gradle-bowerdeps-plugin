@@ -79,6 +79,8 @@ task ci {
     }
 }
 
+bintrayUpload.dependsOn 'check'
+
 distTar.dependsOn 'publishMavenJavaPublicationToMavenRepository'
 distZip.dependsOn 'publishMavenJavaPublicationToMavenRepository'
 
