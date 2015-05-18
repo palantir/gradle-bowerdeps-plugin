@@ -60,6 +60,7 @@ class BowerDepsPlugin implements Plugin<Project> {
                 }
 
                 project.tasks.getByName(bowerDepsExtension.buildTask).dependsOn(bowerDepsConfig.buildDependencies)
+                project.tasks.getByName(bowerDepsExtension.buildTask).inputs.files(bowerDepsConfig)
 
                 getManifestArtifacts(manifest).each { artifact ->
                     project.artifacts.add(BOWERDEPS_CONFIGURATION_NAME, [
