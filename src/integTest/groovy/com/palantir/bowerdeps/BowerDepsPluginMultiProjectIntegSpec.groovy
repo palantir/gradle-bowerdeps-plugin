@@ -22,20 +22,23 @@ import com.moowork.gradle.grunt.GruntPlugin
 import com.moowork.gradle.gulp.GulpPlugin
 
 class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
+    def nodeVersion = '0.12.3'
+    def npmVersion = '2.10.0'
+
     def 'no plugins and no build task specified'() {
         setup:
         // Root
         buildFile << applyPlugin(NodePlugin)
         buildFile << "\n"
 
-        buildFile << '''
+        buildFile << """
         node {
-            version = "0.12.0"
-            npmVersion = "2.7.1"
+            version = '$nodeVersion'
+            npmVersion = '$npmVersion'
             download = true
-            workDir = file("build/node")
+            workDir = file('build/node')
         }
-        '''.stripIndent()
+        """.stripIndent()
 
         // Example App
         File exampleapp = addSubproject('example-app', """
@@ -44,9 +47,10 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         ${applyPlugin(BowerDepsPlugin)}
 
         node {
-          nodeModulesDir = file("../")
-          npmVersion = "2.7.1"
-          workDir = file("../build/node")
+          nodeModulesDir = file('../')
+          npmVersion = '$npmVersion'
+          download = true
+          workDir = file('../build/node')
         }
         """.stripIndent())
 
@@ -106,9 +110,10 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         ${applyPlugin(BowerDepsPlugin)}
 
         node {
-          nodeModulesDir = file("../")
-          npmVersion = "2.7.1"
-          workDir = file("../build/node")
+          nodeModulesDir = file('../')
+          npmVersion = '$npmVersion'
+          download = true
+          workDir = file('../build/node')
         }
 
         bowerdeps {
@@ -154,13 +159,14 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         ${applyPlugin(BowerDepsPlugin)}
 
         node {
-            nodeModulesDir = file("../")
-            npmVersion = "2.7.1"
-            workDir = file("../build/node")
+            nodeModulesDir = file('../')
+            npmVersion = '$npmVersion'
+            download = true
+            workDir = file('../build/node')
         }
 
         grunt {
-            workDir = file("test")
+            workDir = file('test')
         }
         """.stripIndent())
 

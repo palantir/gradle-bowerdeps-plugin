@@ -29,14 +29,14 @@ class BowerDepsPluginIntegSpec extends IntegrationSpec {
         buildFile << applyPlugin(BowerDepsPlugin)
         buildFile << "\n"
 
-        buildFile << '''
+        buildFile << """
             node {
-                version = "0.12.0"
-                npmVersion = "2.7.1"
+                version = '0.12.3'
+                npmVersion = '2.10.0'
                 download = true
-                workDir = file("build/node")
+                workDir = file('build/node')
             }
-        '''.stripIndent()
+        """.stripIndent()
     }
 
     def 'no plugins and no build task specified'() {
