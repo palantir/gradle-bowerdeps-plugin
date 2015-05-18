@@ -60,7 +60,6 @@ group 'com.palantir'
 ext {
     bintrayUser = System.env.'BINTRAY_USER'
     bintrayKey = System.env.'BINTRAY_KEY'
-    travisBranch = System.env.'TRAVIS_BRANCH'
     travisTag = System.env.'TRAVIS_TAG'
 }
 
@@ -75,7 +74,7 @@ task sourceJar(type: Jar) {
 
 task ci {
     dependsOn 'build'
-    if (travisTag && travisBranch == 'master' && bintrayUser != null && bintrayKey != null) {
+    if (travisTag ==~ /\d+\.\d+\.\d+/ && bintrayUser != null && bintrayKey != null) {
         dependsOn 'bintrayUpload'
     }
 }
