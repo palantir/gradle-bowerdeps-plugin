@@ -51,8 +51,8 @@ dependencies {
     testCompile('com.netflix.nebula:nebula-test:2.2.0') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
-    integTestCompile 'com.palantir:gradle-grunt-plugin:0.10-FORK'
-    integTestCompile 'com.palantir:gradle-gulp-plugin:0.10-FORK'
+    integTestCompile 'com.moowork.gradle:gradle-grunt-plugin:0.10'
+    integTestCompile 'com.moowork.gradle:gradle-gulp-plugin:0.10'
 }
 
 group 'com.palantir'
@@ -78,6 +78,8 @@ task ci {
         dependsOn 'bintrayUpload'
     }
 }
+
+bintrayUpload.dependsOn 'check'
 
 distTar.dependsOn 'publishMavenJavaPublicationToMavenRepository'
 distZip.dependsOn 'publishMavenJavaPublicationToMavenRepository'
