@@ -31,10 +31,7 @@ class BowerDepsPluginIntegSpec extends IntegrationSpec {
 
         buildFile << """
             node {
-                version = '0.12.3'
-                npmVersion = '2.10.0'
-                download = true
-                workDir = file('build/node')
+                download = false
             }
         """.stripIndent()
     }
@@ -63,10 +60,9 @@ class BowerDepsPluginIntegSpec extends IntegrationSpec {
         }'''.stripIndent()
 
         when:
-        def result = runTasksSuccessfully('nodeSetup', 'build')
+        def result = runTasksSuccessfully('build')
 
         then:
-        result.wasExecuted('nodeSetup')
         result.wasUpToDate('build')
     }
 
