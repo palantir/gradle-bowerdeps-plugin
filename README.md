@@ -17,7 +17,7 @@ This plugin is useful in multi-project gradle builds where `bower.json` is used 
     - :web-app:example-app matches? /:example-lib-a$/ - false
     - :web-app:example-lib-a matches? /:example-lib-a$/ - true
 6. Add each of the projects as project dependencies of the "bower" configuration
-7. Adds the task dependencies of the "bower" configuration as dependencies of the default front end build task, e.g. `grunt default
+7. Adds the task dependencies of the "bower" configuration as dependencies of the default front end build task, e.g. `grunt default`
 
 ## Installing the plugin ##
 
