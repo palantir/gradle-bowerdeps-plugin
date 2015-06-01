@@ -22,9 +22,6 @@ import com.moowork.gradle.grunt.GruntPlugin
 import com.moowork.gradle.gulp.GulpPlugin
 
 class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
-    def nodeVersion = '0.12.3'
-    def npmVersion = '2.10.0'
-
     def 'no plugins and no build task specified'() {
         setup:
         // Root
@@ -33,10 +30,7 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
 
         buildFile << """
         node {
-            version = '$nodeVersion'
-            npmVersion = '$npmVersion'
-            download = true
-            workDir = file('build/node')
+            download = false
         }
         """.stripIndent()
 
@@ -47,10 +41,8 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         ${applyPlugin(BowerDepsPlugin)}
 
         node {
-          nodeModulesDir = file('../')
-          npmVersion = '$npmVersion'
-          download = true
-          workDir = file('../build/node')
+            download = false
+            nodeModulesDir = file(rootDir)
         }
         """.stripIndent())
 
@@ -110,10 +102,7 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         ${applyPlugin(BowerDepsPlugin)}
 
         node {
-          nodeModulesDir = file('../')
-          npmVersion = '$npmVersion'
-          download = true
-          workDir = file('../build/node')
+            download = false
         }
 
         bowerdeps {
@@ -159,10 +148,8 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         ${applyPlugin(BowerDepsPlugin)}
 
         node {
-            nodeModulesDir = file('../')
-            npmVersion = '$npmVersion'
-            download = true
-            workDir = file('../build/node')
+            download = false
+            nodeModulesDir = file(rootDir)
         }
 
         grunt {
@@ -199,10 +186,9 @@ class BowerDepsPluginMultiProjectIntegSpec extends IntegrationSpec {
         }'''.stripIndent()
 
         when:
-        def result = runTasksSuccessfully('nodeSetup', 'installGrunt', 'installGulp', ':example-app:build')
+        def result = runTasksSuccessfully('installGrunt', 'installGulp', ':example-app:build')
 
         then:
-        result.wasExecuted('nodeSetup')
         result.wasExecuted(':example-lib-b:grunt_default')
         result.wasExecuted(':example-lib-a:grunt_watch')
         result.wasExecuted(':example-app:gulp_default')

@@ -3,6 +3,7 @@ jdk:
 - oraclejdk7
 script:
 - "./gradlew ci --stacktrace"
+sudo: false
 deploy:
   provider: releases
   api_key:
