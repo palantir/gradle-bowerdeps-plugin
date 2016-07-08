@@ -17,7 +17,7 @@
 buildscript {
     repositories {
         maven {
-            url 'http://dl.bintray.com/palantir/releases'
+            url 'https://dl.bintray.com/palantir/releases'
         }
 
         jcenter()
@@ -40,7 +40,7 @@ apply plugin: 'distribution'
 
 repositories {
     maven {
-        url 'http://dl.bintray.com/palantir/releases'
+        url 'https://dl.bintray.com/palantir/releases'
     }
 
     jcenter()
